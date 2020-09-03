@@ -17,10 +17,10 @@ $ composer require setono/cron-builder
 [ico-unstable-version]: https://poser.pugx.org/setono/cron-builder/v/unstable
 [ico-license]: https://poser.pugx.org/setono/cron-builder/license
 [ico-github-actions]: https://github.com/Setono/cron-builder/workflows/build/badge.svg
-[ico-code-coverage]: https://img.shields.io/scrutinizer/coverage/g/Setono/cron-builder.svg
+[ico-code-coverage]: https://codecov.io/gh/Setono/cron-builder/branch/master/graph/badge.svg
 [ico-code-quality]: https://img.shields.io/scrutinizer/g/Setono/cron-builder.svg
 
 [link-packagist]: https://packagist.org/packages/setono/cron-builder
 [link-github-actions]: https://github.com/Setono/cron-builder/actions
-[link-code-coverage]: https://scrutinizer-ci.com/g/Setono/cron-builder/code-structure
+[link-code-coverage]: https://codecov.io/gh/Setono/cron-builder
 [link-code-quality]: https://scrutinizer-ci.com/g/Setono/cron-builder
