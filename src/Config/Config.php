@@ -35,7 +35,12 @@ final class Config
         );
     }
 
-    public function __toString(): string
+    public function getCondition(): ?string
+    {
+        return $this->condition;
+    }
+
+    public function getCrontabLine(): string
     {
         return sprintf(
             '%s %s%s',
@@ -43,8 +48,8 @@ final class Config
         );
     }
 
-    public function getCondition(): ?string
+    public function __toString(): string
     {
-        return $this->condition;
+        return $this->getCrontabLine();
     }
 }
