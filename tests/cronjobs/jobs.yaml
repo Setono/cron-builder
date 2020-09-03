@@ -7,6 +7,10 @@
 
 - schedule: "0 0 * * *"
   command: "php test-script.php"
+  condition: "context.env === 'dev'"
+
+- schedule: "0 0 * * *"
+  command: "php test-script.php"
   description: "Executes a great command"
 
 - schedule: "0 0 * * *"
