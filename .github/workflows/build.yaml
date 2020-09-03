@@ -75,7 +75,7 @@ jobs:
                     coverage: "none"
                     extensions: "${{ env.PHP_EXTENSIONS }}"
                     php-version: "${{ matrix.php-version }}"
-                    tools: "composer-require-checker"
+                    tools: "composer-require-checker, composer-unused"
 
             -   name: "Determine composer cache directory"
                 uses: "./.github/actions/composer/composer/determine-cache-directory"
@@ -94,6 +94,9 @@ jobs:
 
             -   name: "Run maglnet/composer-require-checker"
                 run: "composer-require-checker check"
+
+            -   name: "Run icanhazstring/composer-unused"
+                run: "composer-unused"
 
     checks:
         name: 'PHP ${{ matrix.php-versions }} with composer args: ${{ matrix.composer-args }}'
