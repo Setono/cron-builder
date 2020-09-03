@@ -1,0 +1,13 @@
+- schedule: "0 0 * * *"
+  command: "php test-script.php"
+
+- schedule: "0 0 * * *"
+  command: "php test-script.php"
+  condition: "context.env === 'test'"
+
+- schedule: "0 0 * * *"
+  command: "php test-script.php"
+  description: "Executes a great command"
+
+- schedule: "0 0 * * *"
+  command: "php test-script.php %expr:context.env%"
