@@ -1,0 +1,2 @@
+- schedule: "0 0 * * *"
+  command: "php test-script.php"
