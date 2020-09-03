@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Setono\CronBuilder;
 
+use function Safe\preg_replace;
 use function Safe\sprintf;
 use Setono\CronBuilder\Config\Processor;
 use Setono\CronBuilder\ExpressionLanguage\Context;
@@ -18,6 +19,11 @@ use Webmozart\Assert\Assert;
 final class CronBuilder
 {
     private ExpressionLanguage $expressionLanguage;
+
+    /**
+     * This will hold the last expression language values
+     */
+    private array $expressionLanguageValues = [];
 
     private array $options;
 
@@ -35,24 +41,25 @@ final class CronBuilder
 
     public function build(array $context = []): string
     {
+        $this->expressionLanguageValues = [
+            'context' => new Context($context),
+        ];
+
         $finder = new Finder();
         $finder->files()->in($this->options['source']);
 
         $configs = [];
         foreach ($finder as $file) {
-            $configs[] = Yaml::parseFile($file->getRealPath());
+            $configs[] = Yaml::parseFile((string) $file->getRealPath());
         }
 
         $processor = new Processor();
         $configs = $processor->process($configs);
-        $expressionLanguageValues = [
-            'context' => new Context($context),
-        ];
 
         $newCron = '';
         foreach ($configs as $config) {
             if (null !== $config->getCondition()) {
-                $res = $this->expressionLanguage->evaluate($config->getCondition(), $expressionLanguageValues);
+                $res = $this->expressionLanguage->evaluate($config->getCondition(), $this->expressionLanguageValues);
 
                 Assert::boolean($res, 'The condition must evaluate to a boolean');
 
@@ -61,7 +68,7 @@ final class CronBuilder
                 }
             }
 
-            $crontabLine = $this->resolveVariables($config->getCrontabLine(), $expressionLanguageValues);
+            $crontabLine = $this->resolveVariables($config->getCrontabLine());
 
             $newCron .= $crontabLine . "\n";
         }
@@ -99,11 +106,11 @@ final class CronBuilder
         ]);
     }
 
-    private function resolveVariables(string $str, array $expressionLanguageValues): string
+    private function resolveVariables(string $str): string
     {
         foreach ($this->variableResolvers as $variableResolver) {
             if ($variableResolver instanceof ExpressionLanguageAwareInterface) {
-                $variableResolver->setExpressionLanguage($this->expressionLanguage, $expressionLanguageValues);
+                $variableResolver->setExpressionLanguage($this->expressionLanguage, $this->expressionLanguageValues);
             }
             $str = $variableResolver->resolve($str, $this->options);
         }
@@ -116,9 +123,9 @@ final class CronBuilder
         Assert::oneOf($type, ['begin', 'end']);
 
         if ($type === 'begin') {
-            return '###> ' . $this->options['delimiter'] . ' ###';
+            return $this->resolveVariables('###> ' . $this->options['delimiter'] . ' ###');
         }
 
-        return '###< ' . $this->options['delimiter'] . ' ###';
+        return $this->resolveVariables('###< ' . $this->options['delimiter'] . ' ###');
     }
 }

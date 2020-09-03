@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Setono\CronBuilder\VariableResolver;
 
+use function Safe\preg_match_all;
 use Webmozart\Assert\Assert;
 
 final class ExprVariableResolver implements VariableResolverInterface, ExpressionLanguageAwareInterface
@@ -14,7 +15,7 @@ final class ExprVariableResolver implements VariableResolverInterface, Expressio
     {
         Assert::notNull($this->expressionLanguage);
 
-        if (strpos($cronStr, '%expr:') === false) {
+        if (mb_strpos($cronStr, '%expr:') === false) {
             return $cronStr;
         }
 
