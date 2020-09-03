@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace Setono\CronBuilder;
 
-use Setono\CronBuilder\VariableResolver\PhpBinaryVariableResolver;
 use function Safe\sprintf;
 use Setono\CronBuilder\Config\Processor;
 use Setono\CronBuilder\ExpressionLanguage\Context;
 use Setono\CronBuilder\VariableResolver\ExpressionLanguageAwareInterface;
-use Setono\CronBuilder\VariableResolver\ExprVariableResolver;
 use Setono\CronBuilder\VariableResolver\VariableResolverInterface;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\Finder\Finder;
