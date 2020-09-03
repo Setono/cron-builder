@@ -193,7 +193,7 @@ jobs:
                     dependencies: "${{ matrix.dependencies }}"
 
             -   name: "Collect code coverage with pcov and phpunit/phpunit"
-                run: "composer phpunit --coverage-clover=build/clover.xml"
+                run: "composer phpunit"
 
             -   name: "Send code coverage report to Codecov.io"
                 env:
