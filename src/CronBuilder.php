@@ -112,7 +112,7 @@ final class CronBuilder
             if ($variableResolver instanceof ExpressionLanguageAwareInterface) {
                 $variableResolver->setExpressionLanguage($this->expressionLanguage, $this->expressionLanguageValues);
             }
-            $str = $variableResolver->resolve($str, $this->options);
+            $str = $variableResolver->resolve($str);
         }
 
         return $str;

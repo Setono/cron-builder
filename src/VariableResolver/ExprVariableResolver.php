@@ -11,15 +11,15 @@ final class ExprVariableResolver implements VariableResolverInterface, Expressio
 {
     use ExpressionLanguageAwareTrait;
 
-    public function resolve(string $cronStr, array $options): string
+    public function resolve(string $str): string
     {
         Assert::notNull($this->expressionLanguage);
 
-        if (mb_strpos($cronStr, '%expr:') === false) {
-            return $cronStr;
+        if (mb_strpos($str, '%expr:') === false) {
+            return $str;
         }
 
-        preg_match_all('/%expr:(.*)%/', $cronStr, $matches);
+        preg_match_all('/%expr:(.*)%/', $str, $matches);
 
         if (!isset($matches[0], $matches[1]) || !is_array($matches[0]) || !is_array($matches[1]) || count($matches[0]) !== count($matches[1])) {
             throw new \InvalidArgumentException('Wrong match format'); // todo better exception
@@ -28,9 +28,9 @@ final class ExprVariableResolver implements VariableResolverInterface, Expressio
         foreach ($matches[1] as $key => $expr) {
             $exprValue = $this->expressionLanguage->evaluate($expr, $this->expressionLanguageValues);
 
-            $cronStr = str_replace($matches[0][$key], $exprValue, $cronStr);
+            $str = str_replace($matches[0][$key], $exprValue, $str);
         }
 
-        return $cronStr;
+        return $str;
     }
 }

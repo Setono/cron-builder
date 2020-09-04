@@ -9,7 +9,7 @@ use Symfony\Component\Process\PhpExecutableFinder;
 
 final class PhpBinaryVariableResolver implements VariableResolverInterface
 {
-    public function resolve(string $cronStr, array $options): string
+    public function resolve(string $str): string
     {
         $phpExecutableFinder = new PhpExecutableFinder();
         $phpBinary = $phpExecutableFinder->find();
@@ -18,6 +18,6 @@ final class PhpBinaryVariableResolver implements VariableResolverInterface
             throw new RuntimeException('Could not find a php binary');
         }
 
-        return str_replace('%php_bin%', $phpBinary, $cronStr);
+        return str_replace('%php_bin%', $phpBinary, $str);
     }
 }
