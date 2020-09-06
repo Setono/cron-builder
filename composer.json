@@ -45,6 +45,9 @@
         }
     },
     "prefer-stable": true,
+    "bin": [
+        "bin/cron-builder"
+    ],
     "scripts": {
         "analyse": "phpstan analyse -c phpstan.neon -l max src",
         "check-style": "ecs check --ansi src/ tests/",
