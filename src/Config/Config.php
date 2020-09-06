@@ -9,13 +9,13 @@ use function Safe\sprintf;
 
 final class Config
 {
-    private CronExpression $schedule;
+    public CronExpression $schedule;
 
-    private string $command;
+    public string $command;
 
-    private ?string $condition;
+    public ?string $condition;
 
-    private ?string $description;
+    public ?string $description;
 
     public function __construct(CronExpression $schedule, string $command, string $condition = null, string $description = null)
     {
@@ -33,11 +33,6 @@ final class Config
             $config['condition'] ?? null,
             $config['description'] ?? null
         );
-    }
-
-    public function getCondition(): ?string
-    {
-        return $this->condition;
     }
 
     public function getCrontabLine(): string
