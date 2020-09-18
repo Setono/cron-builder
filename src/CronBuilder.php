@@ -82,7 +82,9 @@ final class CronBuilder
             return '';
         }
 
-        return $this->getDelimiter('begin') . "\n" . $newCron . $this->getDelimiter('end') . "\n";
+        $newCron = rtrim($newCron, "\n");
+
+        return $this->getDelimiter('begin') . "\n" . $newCron . "\n" . $this->getDelimiter('end');
     }
 
     public function merge(string $oldCron, string $newCron): string
@@ -91,11 +93,24 @@ final class CronBuilder
             return $newCron;
         }
 
-        return preg_replace(
-            sprintf('/%s.*%s\n/ms', $this->getDelimiter('begin'), $this->getDelimiter('end')),
+        $replacedCron = preg_replace(
+            sprintf('/%s.*%s/ms',
+                preg_quote($this->getDelimiter('begin'), '/'),
+                preg_quote($this->getDelimiter('end'), '/')
+            ),
             $newCron,
-            $oldCron
+            $oldCron,
+            -1,
+            $replacements
         );
+
+        Assert::lessThanEq($replacements, 1, 'The number of replacements should be 1 or 0');
+
+        if ($replacements > 0) {
+            return $replacedCron;
+        }
+
+        return $oldCron . "\n" . $newCron;
     }
 
     public function addVariableResolver(VariableResolverInterface $variableResolver): void
