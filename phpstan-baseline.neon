@@ -4,4 +4,8 @@ parameters:
 			message: "#^Cannot call method scalarNode\\(\\) on Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeParentInterface\\|null\\.$#"
 			count: 1
 			path: src/Config/Definition.php
+		-
+			message: "#^Call to function iterator_to_array\\(\\) on a separate line has no effect\\.$#"
+			count: 1
+			path: src/CronBuilder.php
 
