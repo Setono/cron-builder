@@ -4,13 +4,20 @@ declare(strict_types=1);
 
 namespace Setono\CronBuilder;
 
+use Cron\CronExpression;
+
 final class CronJob implements \Stringable
 {
+    public readonly string $schedule;
+
     public function __construct(
-        public readonly string $schedule,
+        string $schedule,
         public readonly string $command,
         public readonly ?string $description = null,
     ) {
+        new CronExpression($schedule);
+
+        $this->schedule = $schedule;
     }
 
     public function toString(): string
