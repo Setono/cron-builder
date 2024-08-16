@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Setono\CronBuilder;
 
-use function Safe\preg_replace;
-use function Safe\sprintf;
 use Setono\CronBuilder\Config\Config;
 use Setono\CronBuilder\Config\Processor;
 use Setono\CronBuilder\ExpressionLanguage\Context;
@@ -20,7 +18,7 @@ use Webmozart\Assert\Assert;
 
 final class CronBuilder
 {
-    private ExpressionLanguage $expressionLanguage;
+    private readonly ExpressionLanguage $expressionLanguage;
 
     /**
      * This will hold the last expression language values
@@ -94,14 +92,15 @@ final class CronBuilder
         }
 
         $replacedCron = preg_replace(
-            sprintf('/%s.*%s/ms',
+            sprintf(
+                '/%s.*%s/ms',
                 preg_quote($this->getDelimiter('begin'), '/'),
-                preg_quote($this->getDelimiter('end'), '/')
+                preg_quote($this->getDelimiter('end'), '/'),
             ),
             $newCron,
             $oldCron,
             -1,
-            $replacements
+            $replacements,
         );
 
         Assert::lessThanEq($replacements, 1, 'The number of replacements should be 1 or 0');

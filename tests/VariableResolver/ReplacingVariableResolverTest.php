@@ -13,6 +13,7 @@ final class ReplacingVariableResolverTest extends TestCase
 {
     /**
      * @test
+     *
      * @dataProvider getReplacements
      */
     public function it_replaces(string $str, string $expected, array $replacements): void

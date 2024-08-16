@@ -31,7 +31,7 @@ final class Config
             CronExpression::factory($config['schedule']),
             $config['command'],
             $config['condition'] ?? null,
-            $config['description'] ?? null
+            $config['description'] ?? null,
         );
     }
 
@@ -39,7 +39,9 @@ final class Config
     {
         return sprintf(
             '%s %s%s',
-            $this->schedule->getExpression(), $this->command, $this->description === null ? '' : (' # ' . $this->description)
+            $this->schedule->getExpression(),
+            $this->command,
+            $this->description === null ? '' : (' # ' . $this->description),
         );
     }
 
