@@ -15,6 +15,7 @@
         <directory name="tests"/>
         <ignoreFiles>
             <directory name="vendor"/>
+            <directory name="tests/cronjobs"/>
         </ignoreFiles>
     </projectFiles>
     <plugins>
