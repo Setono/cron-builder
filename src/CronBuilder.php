@@ -81,10 +81,6 @@ final class CronBuilder
 
     public function addContext(string $key, mixed $value): self
     {
-        if (!preg_match('/^[a-zA-Z_]\w*$/', $key)) {
-            throw new \InvalidArgumentException(sprintf('Invalid context key format: %s', $key));
-        }
-
         if (!is_scalar($value)) {
             throw new \InvalidArgumentException(sprintf('The value must be a scalar, got %s for key %s', gettype($value), $key));
         }
@@ -133,11 +129,13 @@ final class CronBuilder
             }
         }
 
-        return sprintf("%s\n%s\n%s", $this->getParsedDelimiter('begin'), rtrim($crontab), $this->getParsedDelimiter('end'));
+        return sprintf("%s\n%s\n%s", $this->getParsedDelimiter('begin'), rtrim($crontab), $this->getParsedDelimiter('end')) . "\n";
     }
 
     public static function merge(string $existingCron, self $cronBuilder): string
     {
+        $existingCron = trim($existingCron);
+
         if ('' === $existingCron) {
             return $cronBuilder->build();
         }
@@ -161,7 +159,7 @@ final class CronBuilder
         }
 
         if (1 === $replacements) {
-            return $replacedCron;
+            return trim($replacedCron) . "\n";
         }
 
         throw new \RuntimeException('The number of replacements should be 1 or 0');
