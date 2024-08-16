@@ -1,8 +1,8 @@
 {
     "name": "setono/cron-builder",
-    "type": "library",
     "description": "Build cron files from a config in your repository",
     "license": "MIT",
+    "type": "library",
     "authors": [
         {
             "name": "Joachim Løvgaard",
@@ -25,13 +25,7 @@
         "phpunit/phpunit": "^10.5",
         "setono/code-quality-pack": "^2.8.2"
     },
-    "config": {
-        "sort-packages": true,
-        "allow-plugins": {
-            "dealerdirect/phpcodesniffer-composer-installer": false,
-            "ergebnis/composer-normalize": true
-        }
-    },
+    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "Setono\\CronBuilder\\": "src/"
@@ -42,10 +36,16 @@
             "Setono\\CronBuilder\\": "tests/"
         }
     },
-    "prefer-stable": true,
     "bin": [
         "bin/cron-builder"
     ],
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": false,
+            "ergebnis/composer-normalize": true
+        },
+        "sort-packages": true
+    },
     "scripts": {
         "analyse": "psalm",
         "check-style": "ecs check",
