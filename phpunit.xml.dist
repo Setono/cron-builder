@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd" bootstrap="vendor/autoload.php"
-         colors="true" verbose="true">
+         colors="true" cacheDirectory=".phpunit.cache">
     <coverage>
-        <include>
-            <directory suffix=".php">src/</directory>
-        </include>
         <report>
             <clover outputFile="build/coverage.xml"/>
-            <html outputDirectory="build/coverage"/>
         </report>
     </coverage>
     <testsuites>
@@ -16,5 +12,9 @@
             <directory>tests</directory>
         </testsuite>
     </testsuites>
-    <logging/>
+    <source>
+        <include>
+            <directory suffix=".php">src/</directory>
+        </include>
+    </source>
 </phpunit>
