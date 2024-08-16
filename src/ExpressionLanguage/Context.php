@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Setono\CronBuilder\ExpressionLanguage;
 
-use function Safe\sprintf;
-
 final class Context
 {
     private array $context;

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Setono\CronBuilder\Config;
 
 use Cron\CronExpression;
-use function Safe\sprintf;
 
 final class Config
 {

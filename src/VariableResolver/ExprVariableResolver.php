@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Setono\CronBuilder\VariableResolver;
 
-use function Safe\preg_match_all;
 use Webmozart\Assert\Assert;
 
 final class ExprVariableResolver implements VariableResolverInterface, ExpressionLanguageAwareInterface
