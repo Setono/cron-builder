@@ -8,14 +8,16 @@ use Cron\CronExpression;
 
 final class CronJob implements \Stringable
 {
-    public readonly string $schedule;
+    public readonly CronExpression $schedule;
 
     public function __construct(
-        string $schedule,
+        CronExpression|string $schedule,
         public readonly string $command,
         public readonly ?string $description = null,
     ) {
-        new CronExpression($schedule);
+        if (is_string($schedule)) {
+            $schedule = new CronExpression($schedule);
+        }
 
         $this->schedule = $schedule;
     }
@@ -24,7 +26,7 @@ final class CronJob implements \Stringable
     {
         return sprintf(
             '%s %s%s',
-            $this->schedule,
+            (string) $this->schedule,
             $this->command,
             $this->description === null ? '' : (' # ' . $this->description),
         );
