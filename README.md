@@ -1,10 +1,10 @@
 # Cron Builder - Generate a crontab from a config directory
 
 [![Latest Version][ico-version]][link-packagist]
-[![Latest Unstable Version][ico-unstable-version]][link-packagist]
 [![Software License][ico-license]](LICENSE)
 [![Build Status][ico-github-actions]][link-github-actions]
 [![Coverage Status][ico-code-coverage]][link-code-coverage]
+[![Mutation testing][ico-infection]][link-infection]
 
 Build your crontab from configuration files in your repository. The configuration files are written in PHP and can be placed anywhere in your repository.
 
@@ -82,11 +82,12 @@ You can save this in a file named `crontab.txt` and add it to your crontab like 
 ```
 
 [ico-version]: https://poser.pugx.org/setono/cron-builder/v/stable
-[ico-unstable-version]: https://poser.pugx.org/setono/cron-builder/v/unstable
 [ico-license]: https://poser.pugx.org/setono/cron-builder/license
 [ico-github-actions]: https://github.com/Setono/cron-builder/workflows/build/badge.svg
 [ico-code-coverage]: https://codecov.io/gh/Setono/cron-builder/branch/master/graph/badge.svg
+[ico-infection]: https://img.shields.io/endpoint?style=flat&url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2FSetono%2Fcron-builder%2F1.x
 
 [link-packagist]: https://packagist.org/packages/setono/cron-builder
 [link-github-actions]: https://github.com/Setono/cron-builder/actions
 [link-code-coverage]: https://codecov.io/gh/Setono/cron-builder
+[link-infection]: https://dashboard.stryker-mutator.io/reports/github.com/Setono/cron-builder/1.x
