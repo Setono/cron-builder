@@ -84,7 +84,7 @@ You can save this in a file named `crontab.txt` and add it to your crontab like 
 [ico-version]: https://poser.pugx.org/setono/cron-builder/v/stable
 [ico-license]: https://poser.pugx.org/setono/cron-builder/license
 [ico-github-actions]: https://github.com/Setono/cron-builder/workflows/build/badge.svg
-[ico-code-coverage]: https://codecov.io/gh/Setono/cron-builder/branch/master/graph/badge.svg
+[ico-code-coverage]: https://codecov.io/gh/Setono/cron-builder/graph/badge.svg?token=WGPL47N07M
 [ico-infection]: https://img.shields.io/endpoint?style=flat&url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2FSetono%2Fcron-builder%2F1.x
 
 [link-packagist]: https://packagist.org/packages/setono/cron-builder
