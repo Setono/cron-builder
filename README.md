@@ -26,12 +26,13 @@ The following two code snippets outlines the simplest usage of the cron builder.
 
 declare(strict_types=1);
 
+use Setono\CronBuilder\Context;
 use Setono\CronBuilder\CronJob;
 
-return static function (array $context): iterable {
+return static function (Context $context): iterable {
     yield new CronJob('0 0 * * *', '/usr/bin/php {{ release_path }}/send-report.php {{ args|join(" ") }}', 'Run every day at midnight');
 
-    if ($context['env'] ?? '' === 'prod') {
+    if ($context->get('env') === 'prod') {
         yield new CronJob('0 0 * * *', '/usr/bin/php {{ release_path }}/process.php {{ args|join(" ") }}');
     }
 };

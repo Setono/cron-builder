@@ -20,12 +20,12 @@ final class CronBuilder
      */
     private array $files = [];
 
-    /** @var array<string, mixed> */
-    private array $context = [];
+    private readonly Context $context;
 
     public function __construct(Environment $twig = null)
     {
         $this->twig = $twig ?? new Environment(new ArrayLoader());
+        $this->context = new Context();
     }
 
     /**
@@ -77,24 +77,27 @@ final class CronBuilder
         return $this;
     }
 
+    public function context(): Context
+    {
+        return $this->context;
+    }
+
+    public function addContext(string $key, mixed $value): self
+    {
+        $this->context->set($key, $value);
+
+        return $this;
+    }
+
     /**
      * @param array<string, mixed> $context
      */
     public function setContext(array $context): self
     {
-        /**
-         * @var mixed $value
-         */
+        /** @var mixed $value */
         foreach ($context as $key => $value) {
             $this->addContext($key, $value);
         }
-
-        return $this;
-    }
-
-    public function addContext(string $key, mixed $value): self
-    {
-        $this->context[$key] = $value;
 
         return $this;
     }
@@ -176,6 +179,6 @@ final class CronBuilder
 
     private function parse(string $value): string
     {
-        return $this->twig->createTemplate($value)->render($this->context);
+        return $this->twig->createTemplate($value)->render($this->context->toArray());
     }
 }
