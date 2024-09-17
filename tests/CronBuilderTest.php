@@ -78,6 +78,32 @@ CRON;
         self::assertSame($expected, CronBuilder::merge($existingCrontab, self::getCronBuilder()));
     }
 
+    /**
+     * @test
+     *
+     * @dataProvider invalidJobsFileProvider
+     */
+    public function it_throws_exception_when_jobs_file_is_invalid(string $jobsFile): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+
+        (new CronBuilder())
+            ->addFile(__DIR__ . '/cronjobs_invalid/' . $jobsFile)
+            ->build()
+        ;
+    }
+
+    /**
+     * @return \Generator<array-key, array{string}>
+     */
+    public function invalidJobsFileProvider(): \Generator
+    {
+        yield ['jobs1.php'];
+        yield ['jobs2.php'];
+        yield ['jobs3.php'];
+        yield ['jobs4.php'];
+    }
+
     private static function getCronBuilder(): CronBuilder
     {
         $cronBuilder = new CronBuilder();
