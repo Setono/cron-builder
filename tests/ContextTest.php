@@ -77,6 +77,16 @@ final class ContextTest extends TestCase
     {
         $context = new Context(['env' => 'prod', 'foo' => 'bar']);
         self::assertCount(2, $context);
+        self::assertFalse($context->isEmpty());
+    }
+
+    /**
+     * @test
+     */
+    public function it_is_empty_by_default(): void
+    {
+        $context = new Context();
+        self::assertTrue($context->isEmpty());
     }
 
     /**
