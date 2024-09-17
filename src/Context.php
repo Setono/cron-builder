@@ -35,6 +35,11 @@ final class Context implements \ArrayAccess, \IteratorAggregate, \Countable
         $this->context[$key] = $value;
     }
 
+    public function remove(string $key): void
+    {
+        unset($this->context[$key]);
+    }
+
     public function offsetExists($offset): bool
     {
         return $this->has($offset);
@@ -56,7 +61,7 @@ final class Context implements \ArrayAccess, \IteratorAggregate, \Countable
 
     public function offsetUnset($offset): void
     {
-        unset($this->context[$offset]);
+        $this->remove($offset);
     }
 
     public function getIterator(): \ArrayIterator
