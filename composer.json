@@ -1,6 +1,6 @@
 {
     "name": "setono/cron-builder",
-    "description": "Build cron files from a config in your repository",
+    "description": "Generate a crontab from a config directory",
     "license": "MIT",
     "type": "library",
     "authors": [

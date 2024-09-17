@@ -1,4 +1,4 @@
-# Cron Builder - Build cron files from a config in your repository
+# Cron Builder - Generate a crontab from a config directory
 
 [![Latest Version][ico-version]][link-packagist]
 [![Latest Unstable Version][ico-unstable-version]][link-packagist]
