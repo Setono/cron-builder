@@ -29,18 +29,6 @@ final class CronBuilder
     }
 
     /**
-     * @param 'begin'|'end' $type
-     */
-    public function getParsedDelimiter(string $type): string
-    {
-        if ('begin' === $type) {
-            return $this->parse('###> ' . $this->delimiter . ' ###');
-        }
-
-        return $this->parse('###< ' . $this->delimiter . ' ###');
-    }
-
-    /**
      * @param non-empty-string $delimiter
      */
     public function setDelimiter(string $delimiter): self
@@ -180,5 +168,17 @@ final class CronBuilder
     private function parse(string $value): string
     {
         return $this->twig->createTemplate($value)->render($this->context->toArray());
+    }
+
+    /**
+     * @param 'begin'|'end' $type
+     */
+    private function getParsedDelimiter(string $type): string
+    {
+        if ('begin' === $type) {
+            return $this->parse('###> ' . $this->delimiter . ' ###');
+        }
+
+        return $this->parse('###< ' . $this->delimiter . ' ###');
     }
 }
