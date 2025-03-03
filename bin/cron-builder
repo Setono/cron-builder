@@ -7,6 +7,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Setono\CronBuilder\CronBuilder;
+use Symfony\Component\Console\SingleCommandApplication;
 
 set_time_limit(0);
 
@@ -23,24 +24,12 @@ if (is_file($autoload = __DIR__ . '/../vendor/autoload.php')) {
     exit(1);
 }
 
-(new Application('cron-builder'))
-    ->register('validate')
-    ->addArgument('source-dir', InputArgument::OPTIONAL, 'The directory where your cronjob config files are located')
-    ->addOption('delimiter', null, InputOption::VALUE_REQUIRED, 'The marker that divides sections in your crontab')
-    ->setCode(function(InputInterface $input, OutputInterface $output) {
-        $options = [];
-
-        if($input->getArgument('source-dir') !== null) {
-            $options['source'] = $input->getArgument('source-dir');
-        }
-        if($input->getOption('delimiter') !== null) {
-            $options['delimiter'] = $input->getOption('delimiter');
-        }
-
-        $cronBuilder = new CronBuilder($options);
-        $cronBuilder->validate();
+(new SingleCommandApplication('cron-builder'))
+    ->addArgument('directories', InputArgument::REQUIRED | InputArgument::IS_ARRAY, 'The directory (or directories) where your cronjob config files are located')
+    ->addOption('delimiter', null, InputOption::VALUE_OPTIONAL, 'The marker that divides sections in your crontab')
+    ->setCode(function(InputInterface $input) {
+        $cronBuilder = new CronBuilder($input->getArgument('directories'));
+        fwrite(STDOUT, $cronBuilder->build());
     })
-    ->getApplication()
-    ->setDefaultCommand('validate', true)
     ->run()
 ;
