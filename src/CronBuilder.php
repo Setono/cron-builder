@@ -143,11 +143,7 @@ final class CronBuilder
             return $existingCron . "\n\n" . $cron;
         }
 
-        if (1 === $replacements) {
-            return trim($replacedCron) . "\n";
-        }
-
-        throw new \RuntimeException('The number of replacements should be 1 or 0');
+        return trim($replacedCron) . "\n";
     }
 
     private function parse(string $value): string
