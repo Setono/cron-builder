@@ -121,12 +121,11 @@ final class CronBuilder
     public static function merge(string $existingCron, self $cronBuilder): string
     {
         $existingCron = trim($existingCron);
+        $cron = $cronBuilder->build();
 
         if ('' === $existingCron) {
-            return $cronBuilder->build();
+            return $cron;
         }
-
-        $cron = $cronBuilder->build();
 
         $replacedCron = preg_replace(
             sprintf(
