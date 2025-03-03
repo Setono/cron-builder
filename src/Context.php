@@ -30,14 +30,18 @@ final class Context implements \ArrayAccess, \IteratorAggregate, \Countable
         return $this->context[$key];
     }
 
-    public function set(string $key, mixed $value): void
+    public function set(string $key, mixed $value): self
     {
         $this->context[$key] = $value;
+
+        return $this;
     }
 
-    public function remove(string $key): void
+    public function remove(string $key): self
     {
         unset($this->context[$key]);
+
+        return $this;
     }
 
     public function offsetExists($offset): bool
