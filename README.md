@@ -16,7 +16,7 @@ composer require setono/cron-builder
 
 ## Usage
 
-The following two code snippets outlines the simplest usage of the cron builder.
+The following two code snippets outline the simplest usage of the cron builder.
 
 **1. Add your commands**
 
@@ -78,7 +78,7 @@ This will output the following:
 You can save this in a file named `crontab.txt` and add it to your crontab like this:
 
 ```bash
- cat crontab.txt | crontab -
+cat crontab.txt | crontab -
 ```
 
 [ico-version]: https://poser.pugx.org/setono/cron-builder/v/stable
