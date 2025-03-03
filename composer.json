@@ -19,6 +19,7 @@
         "phpunit/phpunit": "^9.6",
         "psalm/plugin-phpunit": "^0.19.0",
         "setono/code-quality-pack": "^2.8.2",
+        "shipmonk/composer-dependency-analyser": "^1.8.2",
         "symfony/finder": "^6.4 || ^7.0"
     },
     "prefer-stable": true,
