@@ -52,18 +52,11 @@ When your cronjobs are defined, you can output the crontab file:
 use Setono\CronBuilder\CronBuilder;
 use Symfony\Component\Finder\Finder;
 
-echo (new CronBuilder())
-    ->addFiles(
-        (new Finder())
-            ->files()
-            ->in(__DIR__ . '/etc/cronjobs')
-            ->name('*.php')
-    )
-    ->addContext('release_path', '/home/johndoe/public_html')
-    ->addContext('env', 'prod')
-    ->addContext('args', ['--verbose'])
-    ->build()
-;
+echo (new CronBuilder(__DIR__ . '/etc/cronjobs', [
+    'release_path' => '/home/johndoe/public_html',
+    'env' => 'prod',
+    'args' => ['--verbose'],
+]))->build();
 ```
 
 This will output the following:
