@@ -140,7 +140,7 @@ final class CronBuilder
         );
 
         if (0 === $replacements) {
-            return $existingCron . "\n" . $cron;
+            return $existingCron . "\n\n" . $cron;
         }
 
         if (1 === $replacements) {
