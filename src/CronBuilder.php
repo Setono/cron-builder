@@ -29,8 +29,6 @@ final class CronBuilder
      */
     public function __construct(string|array $directories = [], array $context = [])
     {
-        $this->twig = new Environment(new ArrayLoader());
-
         if (is_string($directories)) {
             $directories = [$directories];
         }
@@ -45,6 +43,8 @@ final class CronBuilder
         }
 
         $this->context = new Context($context);
+        $this->twig = new Environment(new ArrayLoader());
+        $this->twig->addExtension(new TwigExtension($this->context));
     }
 
     public function addFile(string|\SplFileInfo $file): self

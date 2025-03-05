@@ -43,6 +43,13 @@ These are placeholders that will be replaced with the values from the context ar
 This is done using the [Twig](https://twig.symfony.com/) templating engine, which means
 you can use all the features of Twig in your cronjob definitions.
 
+If the placeholders contain any character(s) that will be interpreted by Twig (e.g. `/`), you can use the
+`context` Twig function like so:
+
+```php
+yield new CronJob('0 0 * * *', '{{ context("bin/php") }} {{ release_path }}/process.php');
+```
+
 **2. Build the crontab**
 
 When your cronjobs are defined, you can output the crontab file:
